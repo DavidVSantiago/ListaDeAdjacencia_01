@@ -60,14 +60,29 @@ void criarRelacao(int V, Node *G[V]){
     // verifica se as adjacências de p1 estão vazias (vértice sem ligação)
     if(G[p1]==NULL){
         G[p1] = novoP2;
-    }
-
-    Node* pont = G[p1]; // cria um apontador para as adjacências de p1
-    while (pont!=NULL){
-        pont = pont->prox;
+    }else{ // existem adjacências em p1
+        Node* pont = G[p1]; // cria um apontador para a primeira adjacência de p1
+        // leva 'pont' para a ultima adjacência de p1
+        while (pont->prox!=NULL){
+            pont = pont->prox;
+        }
+        // coloca p2 como próximo nó da útima adjacência de p1
+        pont->prox = novoP2;
     }
 
     /* INSERÇÃO DE P1 COMO ADJACÊNCIA DE P2 ------------------ */
+    // verifica se as adjacências de p2 estão vazias (vértice sem ligação)
+    if(G[p2]==NULL){
+        G[p2] = novoP1;
+    }else{ // existem adjacências em p2
+        Node* pont = G[p2]; // cria um apontador para a primeira adjacência de p2
+        // leva 'pont' para a ultima adjacência de p2
+        while (pont->prox!=NULL){
+            pont = pont->prox;
+        }
+        // coloca p1 como próximo nó da útima adjacência de p2
+        pont->prox = novoP1;
+    }
 }
 
 void removerRelacao(int V, Node *G[V]){
